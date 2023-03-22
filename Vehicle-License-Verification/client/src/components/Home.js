@@ -9,6 +9,7 @@ export const Home = (props) => {
   const [currentAddress, setCurrentAddress] = useState("");
   const [isHeAdmin, setIsHeAdmin] = useState(false);
   const navigate = useNavigate();
+  const [contract, setContract] = useState();
 
 
   const connectToMetaMask = async () => {
@@ -31,6 +32,7 @@ export const Home = (props) => {
           deployedNetwork.address
         );
 
+        
        
 
         const data = await contract.methods.isAdmin(accounts[0]).call();
@@ -51,6 +53,48 @@ export const Home = (props) => {
     }
   };
 
+
+  const connectToMetaMaskforOfficial = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.enable();
+        const web3 = new Web3(window.ethereum);
+        setWeb3(web3);
+        const accounts = await web3.eth.getAccounts();
+        setCurrentAddress(accounts[0]);
+
+        // console.log(web3);
+        const networkId = await web3.eth.net.getId();
+        //console.log(networkId);
+        const deployedNetwork = DLicenseVerifier.networks[networkId];
+        //console.log(deployedNetwork.address);
+
+        const contract = new web3.eth.Contract(
+          DLicenseVerifier.abi,
+          deployedNetwork.address
+        );
+
+        
+       
+
+        const data = await contract.methods.verifyOfficial(accounts[0]).call();
+
+        //
+
+        if (data) {
+          //window.open("/admin");
+          navigate("/official");
+        }
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.error("metamask is not installed");
+    }
+  };
+
  
 
   return (
@@ -59,7 +103,7 @@ export const Home = (props) => {
       <div className="loginButtons">
         <button onClick={connectToMetaMask}>Admin</button>
         <p>Current Address: {currentAddress}</p>
-        <button>Official</button>
+        <button onClick={connectToMetaMaskforOfficial}>Official</button>
       </div>
     </div>
   );

@@ -13,6 +13,15 @@ contract VehicleLicenseVerifier {
         admin = msg.sender;
     }
 
+    function verifyOfficial(address officialAddress) public view returns (bool) {
+    for (uint i = 0; i < addressOfOfficials.length; i++) {
+        if (addressOfOfficials[i] == officialAddress) {
+            return true;
+        }
+    }
+    return false;
+}
+
     function isAdmin(address adminAddress) public view returns (bool) {
         if (adminAddress == admin) {
             return true;
