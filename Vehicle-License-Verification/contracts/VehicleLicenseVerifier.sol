@@ -43,5 +43,36 @@ contract VehicleLicenseVerifier {
     }
     return officials;
 }
+
+
+
+
+struct licenseDetail{
+        string Name;
+        string Village;
+        string Dzongkhag;
+        string LicenseNo;
+        string IssuedDate;
+        string Validity;
+    }
+
+    //to add the licensedeatils to the blockchain
+    uint[] barcodeNumbers;
+    mapping(uint=>licenseDetail) licenseInfos;
+
+    function addLicenseInfo(uint _barcodeNumber,string memory _name,string memory _village,string memory _dzongkhag,string memory _licenseNo,string memory _issuedDate,string memory _validity) public{
+        licenseInfos[_barcodeNumber]=licenseDetail(_name,_village,_dzongkhag,_licenseNo,_issuedDate,_validity); 
+        barcodeNumbers.push(_barcodeNumber);
+    }
+
+    //to view the license details after adding
+    function viewLicenseInfos() public view returns (licenseDetail[] memory) {
+    licenseDetail[] memory license = new licenseDetail[](barcodeNumbers.length);
+    for (uint i = 0; i < barcodeNumbers.length; i++) {
+        license[i] = licenseInfos[barcodeNumbers[i]];
+    }
+    return license;
+}
+
 }
 

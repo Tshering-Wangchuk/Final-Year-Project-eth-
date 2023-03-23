@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import DLicenseVerifier from "../contracts/VehicleLicenseVerifier.json";
 import Web3 from "web3";
-import { useNavigate } from "react-router-dom";
 
 const Admin = (props) => {
   const [currentAddress, setCurrentAddress] = useState("");
