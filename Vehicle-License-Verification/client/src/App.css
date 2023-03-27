@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -36,3 +38,47 @@
     transform: rotate(360deg);
   }
 }
+
+
+.background {
+  background-color: #eff2f6;
+  height: 1000px;
+  font-family:sans-serif;
+  
+
+}
+
+.bgpic{
+  background-image: url("./Images/blockchain.jpg");
+  height: 1000px;
+}
+
+.websitename{
+  margin-top: 10%;
+  font-size:70px;
+  
+  
+}
+
+.loginMaterials{
+  background-color: rgb(221, 231, 241);
+  padding: 5%;
+  margin: 5%;
+  
+}
+
+.metamask{
+ 
+  height: 5rem;
+  
+}
+
+.adminAddForm{
+  width: 25rem;
+  justify-content: center;
+}
+
+.adminView{
+  background-color: rgb(221, 231, 241);
+}
+

@@ -5,6 +5,7 @@ import Admin from './components/Admin';
 import { Home } from './components/Home';
 import Official from './components/Official';
 import Error from './components/Error';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -19,7 +20,6 @@ function App() {
 
   return (
     <div className="App">
-     <h1>Vehicle License Verification System</h1>
      <BrowserRouter>
      <Routes>
         <Route path="/" element={<Home contract={setContracts} address={setCurrentAddress}/>}/>

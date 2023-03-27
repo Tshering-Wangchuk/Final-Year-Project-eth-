@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
+import "../App.css";
 import { useNavigate } from "react-router-dom";
-
 import DLicenseVerifier from "../contracts/VehicleLicenseVerifier.json";
+import metamask from "../Images/metamask.png";
+
+import Button from "react-bootstrap/Button";
 
 export const Home = (props) => {
   const [web3, setWeb3] = useState(null);
@@ -10,7 +13,6 @@ export const Home = (props) => {
   const [isHeAdmin, setIsHeAdmin] = useState(false);
   const navigate = useNavigate();
   const [contract, setContract] = useState();
-
 
   const connectToMetaMask = async () => {
     if (window.ethereum) {
@@ -32,9 +34,6 @@ export const Home = (props) => {
           deployedNetwork.address
         );
 
-        
-       
-
         const data = await contract.methods.isAdmin(accounts[0]).call();
 
         //
@@ -42,6 +41,8 @@ export const Home = (props) => {
         if (data) {
           //window.open("/admin");
           navigate("/admin");
+        } else {
+          window.alert("Error: User is not verified.");
         }
 
         console.log(data);
@@ -52,7 +53,6 @@ export const Home = (props) => {
       console.error("metamask is not installed");
     }
   };
-
 
   const connectToMetaMaskforOfficial = async () => {
     if (window.ethereum) {
@@ -74,9 +74,6 @@ export const Home = (props) => {
           deployedNetwork.address
         );
 
-        
-       
-
         const data = await contract.methods.verifyOfficial(accounts[0]).call();
 
         //
@@ -84,6 +81,8 @@ export const Home = (props) => {
         if (data) {
           //window.open("/admin");
           navigate("/official");
+        } else {
+          window.alert("Error: User is not verified.");
         }
 
         console.log(data);
@@ -95,15 +94,64 @@ export const Home = (props) => {
     }
   };
 
- 
-
   return (
-    <div>
-      <div>Please Login with metamask</div>
-      <div className="loginButtons">
-        <button onClick={connectToMetaMask}>Admin</button>
-        <p>Current Address: {currentAddress}</p>
-        <button onClick={connectToMetaMaskforOfficial}>Official</button>
+    <div className="container background">
+      <div className="row ">
+        <div className="col-md-6 fs-5">
+          <nav class="nav nav-pills flex-column flex-sm-row">
+            <a
+              class="flex-sm-fill text-sm-center nav-link active"
+              aria-current="page"
+              href="#"
+            >
+              Active
+            </a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">
+              Longer nav link
+            </a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">
+              Link
+            </a>
+            <a class="flex-sm-fill text-sm-center nav-link disabled">
+              Disabled
+            </a>
+          </nav>
+        </div>
+
+        <div className="col-md-6 "></div>
+      </div>
+      <div className="row ">
+        <div className="col-md-9">
+          <p className="fw-bolder websitename">
+            Driving License Verification System
+          </p>
+          <div className="fs-3">- Using Blockchain Technology </div>
+        </div>
+
+        <div className="col-md-3 ">
+          <div className="loginMaterials">
+            <div className="text-info-emphasis fs-4">
+              <p>Please Login with</p>
+
+              <img className="metamask" alt="MetaMask" src={metamask} />
+            </div>
+
+            <div className="grid gap-3">
+              <Button
+                className=" btn btn-primary p-2 m-2"
+                onClick={connectToMetaMask}
+              >
+                Admin
+              </Button>
+              <Button
+                className="btn btn-primary p-2"
+                onClick={connectToMetaMaskforOfficial}
+              >
+                Official
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
