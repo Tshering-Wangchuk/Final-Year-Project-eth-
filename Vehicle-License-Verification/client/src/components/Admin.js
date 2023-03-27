@@ -8,6 +8,7 @@ const Admin = (props) => {
   const [currentAddress, setCurrentAddress] = useState("");
   const [contract, setContract] = useState();
   const [officials, setOfficials] = useState([]);
+  
 
   useEffect(() => {
     connectToMetaMask();
@@ -103,6 +104,8 @@ const Admin = (props) => {
     });
   };
 
+ 
+
   return (
     <div>
       <h1>Admin</h1>
@@ -112,59 +115,64 @@ const Admin = (props) => {
         <div className="row ">
           <div className="col-md-6 ">
             <div className="adminAddForm">
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3 ">
-                <label htmlFor="name" class="form-label">
-                  Name:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  class="form-control"
-                  name="name"
-                  value={officialData.name}
-                  onChange={handleInputChange}
-                />
-              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3 ">
+                  <label htmlFor="name" class="form-label">
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    name="name"
+                    value={officialData.name}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              <div className="mb-3">
-                <label htmlFor="dzongkhag" class="form-label">
-                  Dzongkhag:
-                </label>
-                <input
-                  type="text"
-                  id="dzongkhag"
-                  name="dzongkhag"
-                  class="form-control"
-                  value={officialData.dzongkhag}
-                  onChange={handleInputChange}
-                />
-              </div>
+                <div className="mb-3">
+                  <label htmlFor="dzongkhag" class="form-label">
+                    Dzongkhag:
+                  </label>
+                  <input
+                    type="text"
+                    id="dzongkhag"
+                    name="dzongkhag"
+                    class="form-control"
+                    value={officialData.dzongkhag}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              <div className="mb-3" class="form-label">
-                <label htmlFor="address">Wallet Address:</label>
-                <input
-                  type="text"
-                  id="address"
-                  class="form-control"
-                  name="address"
-                  value={officialData.address}
-                  onChange={handleInputChange}
-                />
-              </div>
+                <div className="mb-3" class="form-label">
+                  <label htmlFor="address">Wallet Address:</label>
+                  <input
+                    type="text"
+                    id="address"
+                    class="form-control"
+                    name="address"
+                    value={officialData.address}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              <Button type="submit">Submit</Button>
-            </form>
+                <Button type="submit">Submit</Button>
+              </form>
             </div>
           </div>
           <div className="col-md-6">
             <Button onClick={viewOfficials}>View users</Button>
 
-            <div className="adminView">
+            <div className="adminView ">
               {officials.map((official) => (
+                
                 <div key={official.name}>
-                  <p>Name: {official.name}</p>
-                  <p>Dzongkhag: {official.Dzongkhag}</p>
+                  
+                  <h5 className="form-label">Name:</h5>
+                  <p> {official.name}</p>
+                  <p className="form-label">Dzongkhag: </p>
+                  <p>{official.Dzongkhag}</p>
+                 
                 </div>
               ))}
             </div>
