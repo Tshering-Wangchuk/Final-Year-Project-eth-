@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import DLicenseVerifier from "../contracts/VehicleLicenseVerifier.json";
+import Button from "react-bootstrap/esm/Button";
 
 const Official = () => {
   const [currentAddress, setCurrentAddress] = useState("");
@@ -53,10 +54,8 @@ const Official = () => {
     licenseNo: "",
     issuedDate: "",
     validity: "",
-    barcodeNo:"",
+    barcodeNo: "",
   });
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,25 +69,34 @@ const Official = () => {
       licenseData.validity
     );
 
-    await contract.methods.addLicenseInfo(licenseData.barcodeNo, licenseData.name, licenseData.village, licenseData.dzongkhag, licenseData.licenseNo, licenseData.issuedDate, licenseData.validity)
-    .send({ from: currentAddress }, function (error, transactionHash) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Transaction hash: ", transactionHash);
-      }
-    });
+    await contract.methods
+      .addLicenseInfo(
+        licenseData.barcodeNo,
+        licenseData.name,
+        licenseData.village,
+        licenseData.dzongkhag,
+        licenseData.licenseNo,
+        licenseData.issuedDate,
+        licenseData.validity
+      )
+      .send({ from: currentAddress }, function (error, transactionHash) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Transaction hash: ", transactionHash);
+          window.alert("Data entered Successfully!");
+        }
+      });
 
     setLicenseData({
-    name: "",
-    village: "",
-    dzongkhag: "",
-    licenseNo: "",
-    issuedDate: "",
-    validity: "",
-    barcodeNo:"",
+      name: "",
+      village: "",
+      dzongkhag: "",
+      licenseNo: "",
+      issuedDate: "",
+      validity: "",
+      barcodeNo: "",
     });
-
   };
 
   const handleInputChange = (event) => {
@@ -98,10 +106,7 @@ const Official = () => {
     });
   };
 
-
   const viewOfficials = async () => {
-   
-
     const officialss = await contract.methods.viewLicenseInfos().call();
     setLicenses(officialss);
     console.log(licenses);
@@ -110,107 +115,159 @@ const Official = () => {
     //setViewOff(viewOfficial);
   };
 
-  
-
   return (
     <div>
-      <h1>Admin</h1>
-      <h2> hello </h2>
+      <h1>Official</h1>
+      <h2> current official Address: {currentAddress}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={licenseData.name}
-            onChange={handleInputChange}
-          />
+      <div className="container background">
+        <div className="row ">
+          <div className="col-md-6">
+            <div className="adminAddForm">
+              <form onSubmit={handleSubmit} className="form-floating fs-5">
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    name="name"
+                    value={licenseData.name}
+                    onChange={handleInputChange}
+                  />
+                  <label for="name">Name:</label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="village"
+                    class="form-control"
+                    name="village"
+                    value={licenseData.village}
+                    onChange={handleInputChange}
+                  />
+                  <label for="dzongkhag" class="form-label">
+                    Village:
+                  </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="dzongkhag"
+                    class="form-control"
+                    name="dzongkhag"
+                    value={licenseData.dzongkhag}
+                    onChange={handleInputChange}
+                  />
+                  <label for="address" class="form-label">
+                    Dzongkhag:
+                  </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="licenseNo"
+                    class="form-control"
+                    name="licenseNo"
+                    value={licenseData.licenseNo}
+                    onChange={handleInputChange}
+                  />
+
+                  <label for="LicenseNo" class="form-label">
+                    LicenseNo:
+                  </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="issuedDate"
+                    class="form-control"
+                    name="issuedDate"
+                    value={licenseData.issuedDate}
+                    onChange={handleInputChange}
+                  />
+
+                  <label for="issuedDate" class="form-label">
+                    IssuedDate:
+                  </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="validity"
+                    class="form-control"
+                    name="validity"
+                    value={licenseData.validity}
+                    onChange={handleInputChange}
+                  />
+
+                  <label for="address" class="form-label">
+                    Validity:
+                  </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  <input
+                    type="text"
+                    id="barcodeNo"
+                    class="form-control"
+                    name="barcodeNo"
+                    value={licenseData.barcodeNo}
+                    onChange={handleInputChange}
+                  />
+
+                  <label for="address" class="form-label">
+                    Barcode No:
+                  </label>
+                </div>
+
+                <button className="btn btn-primary p-2" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className="col-md-6 ">
+            <button className="btn btn-primary p-2" onClick={viewOfficials}>
+              View license
+            </button>
+
+            <div>
+              <table className="table table-striped-columns table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Village</th>
+                    <th scope="col">Dzongkhag</th>
+                    <th scope="col">License No</th>
+                    <th scope="col">IssuedDate</th>
+                    <th scope="col">Validity</th>
+                  </tr>
+                </thead>
+
+                <tbody className="table-group-divider">
+                  {licenses.map((license) => (
+                    <tr key={license.Name}>
+                      <td>{license.Name}</td>
+                      <td>{license.Village}</td>
+                      <td>{license.Dzongkhag}</td>
+                      <td>{license.LicenseNo}</td>
+                      <td>{license.IssuedDate}</td>
+                      <td>{license.Validity}</td>
+                      <td>
+                        <Button className="btn btn-warning">Edit</Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <label htmlFor="dzongkhag">Village:</label>
-          <input
-            type="text"
-            id="village"
-            name="village"
-            value={licenseData.village}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="address">Dzongkhag:</label>
-          <input
-            type="text"
-            id="dzongkhag"
-            name="dzongkhag"
-            value={licenseData.dzongkhag}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="LicenseNo">LicenseNo:</label>
-          <input
-            type="text"
-            id="licenseNo"
-            name="licenseNo"
-            value={licenseData.licenseNo}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="issuedDate">IssuedDate:</label>
-          <input
-            type="text"
-            id="issuedDate"
-            name="issuedDate"
-            value={licenseData.issuedDate}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="address">Validity:</label>
-          <input
-            type="text"
-            id="validity"
-            name="validity"
-            value={licenseData.validity}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="address">Barcode No:</label>
-          <input
-            type="text"
-            id="barcodeNo"
-            name="barcodeNo"
-            value={licenseData.barcodeNo}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
-
-      <button onClick={viewOfficials}>View license</button>
-
-      <div>
-      {licenses.map((license) => (
-        <div key={license.Name}>
-          <p>Name: {license.Name}</p>
-          <p>Village: {license.Village}</p>
-          <p>Dzongkhag: {license.Dzongkhag}</p>
-          <p>Dzongkhag: {license.LicenseNo}</p>
-          <p>Name: {license.IssuedDate}</p>
-          <p>Dzongkhag: {license.Validity}</p>
-        </div>
-      ))}
       </div>
     </div>
   );

@@ -44,6 +44,7 @@
   background-color: #eff2f6;
   height: 1000px;
   font-family:sans-serif;
+  padding: 1%;
   
 
 }
@@ -79,6 +80,15 @@
 }
 
 .adminView{
-  background-color: rgb(221, 231, 241);
+  background-color: rgb(14, 109, 205);
 }
 
+
+.paraHead{
+font-weight: bold;
+}
+
+.homePic{
+  height: 1rem;
+  padding: 30%;
+}

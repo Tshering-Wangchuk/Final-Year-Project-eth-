@@ -8,7 +8,6 @@ const Admin = (props) => {
   const [currentAddress, setCurrentAddress] = useState("");
   const [contract, setContract] = useState();
   const [officials, setOfficials] = useState([]);
-  
 
   useEffect(() => {
     connectToMetaMask();
@@ -75,6 +74,7 @@ const Admin = (props) => {
           console.log(error);
         } else {
           console.log("Transaction hash: ", transactionHash);
+          window.alert("Users entered Successfullly");
         }
       });
 
@@ -104,8 +104,6 @@ const Admin = (props) => {
     });
   };
 
- 
-
   return (
     <div>
       <h1>Admin</h1>
@@ -115,11 +113,8 @@ const Admin = (props) => {
         <div className="row ">
           <div className="col-md-6 ">
             <div className="adminAddForm">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3 ">
-                  <label htmlFor="name" class="form-label">
-                    Name:
-                  </label>
+              <form onSubmit={handleSubmit} class="form-floating fs-5">
+                <div class="form-floating mb-3">
                   <input
                     type="text"
                     id="name"
@@ -128,12 +123,12 @@ const Admin = (props) => {
                     value={officialData.name}
                     onChange={handleInputChange}
                   />
+                  <label for="name" class="form-label">
+                    Name:
+                  </label>
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="dzongkhag" class="form-label">
-                    Dzongkhag:
-                  </label>
+                <div class="form-floating mb-3">
                   <input
                     type="text"
                     id="dzongkhag"
@@ -142,10 +137,13 @@ const Admin = (props) => {
                     value={officialData.dzongkhag}
                     onChange={handleInputChange}
                   />
+
+                  <label htmlFor="dzongkhag" class="form-label">
+                    Dzongkhag:
+                  </label>
                 </div>
 
-                <div className="mb-3" class="form-label">
-                  <label htmlFor="address">Wallet Address:</label>
+                <div class="form-floating mb-3">
                   <input
                     type="text"
                     id="address"
@@ -154,27 +152,36 @@ const Admin = (props) => {
                     value={officialData.address}
                     onChange={handleInputChange}
                   />
+
+                  <label htmlFor="address">Wallet Address:</label>
                 </div>
 
-                <Button type="submit">Submit</Button>
+                <Button className="btn btn-primary p-2" type="submit">Submit</Button>
               </form>
             </div>
           </div>
-          <div className="col-md-6">
-            <Button onClick={viewOfficials}>View users</Button>
 
-            <div className="adminView ">
-              {officials.map((official) => (
-                
-                <div key={official.name}>
-                  
-                  <h5 className="form-label">Name:</h5>
-                  <p> {official.name}</p>
-                  <p className="form-label">Dzongkhag: </p>
-                  <p>{official.Dzongkhag}</p>
-                 
-                </div>
-              ))}
+          <div className="col-md-6">
+            <Button className="btn btn-primary p-2" onClick={viewOfficials}>View users</Button>
+            <div>
+              <table className="table table-striped-columns table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Dzongkhag</th>
+                  </tr>
+                </thead>
+
+                <tbody className="table-group-divider">
+                  {officials.map((official) => (
+                    <tr key={official.name}>
+                      <td> {official.name}</td>
+
+                      <td>{official.Dzongkhag}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

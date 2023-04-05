@@ -4,6 +4,9 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import DLicenseVerifier from "../contracts/VehicleLicenseVerifier.json";
 import metamask from "../Images/metamask.png";
+import Safety from "../Images/safety.png";
+import liability from "../Images/liability.png";
+import fraud from "../Images/fraud.png";
 
 import Button from "react-bootstrap/Button";
 
@@ -97,35 +100,11 @@ export const Home = (props) => {
   return (
     <div className="container background">
       <div className="row ">
-        <div className="col-md-6 fs-5">
-          <nav class="nav nav-pills flex-column flex-sm-row">
-            <a
-              class="flex-sm-fill text-sm-center nav-link active"
-              aria-current="page"
-              href="#"
-            >
-              Active
-            </a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">
-              Longer nav link
-            </a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">
-              Link
-            </a>
-            <a class="flex-sm-fill text-sm-center nav-link disabled">
-              Disabled
-            </a>
-          </nav>
-        </div>
-
-        <div className="col-md-6 "></div>
-      </div>
-      <div className="row ">
         <div className="col-md-9">
           <p className="fw-bolder websitename">
             Driving License Verification System
           </p>
-          <div className="fs-3">- Using Blockchain Technology </div>
+          
         </div>
 
         <div className="col-md-3 ">
@@ -133,7 +112,11 @@ export const Home = (props) => {
             <div className="text-info-emphasis fs-4">
               <p>Please Login with</p>
 
-              <img className="metamask" alt="MetaMask" src={metamask} />
+              <img
+                className="metamask img-fluid"
+                alt="MetaMask"
+                src={metamask}
+              />
             </div>
 
             <div className="grid gap-3">
@@ -150,6 +133,44 @@ export const Home = (props) => {
                 Official
               </Button>
             </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-4">
+            <img className="homePic img-fluid" src={Safety} />
+          </div>
+          <div className="col-md-4">
+            <img className="homePic img-fluid" src={liability} />
+          </div>
+          <div className="col-md-4">
+            <img className="homePic img-fluid" src={fraud} />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-4">
+            <p className="paraHead">Safety</p>
+            <p>
+              Driving license verification helps ensure that drivers have the
+              necessary skills and knowledge to operate a vehicle safely on
+              public roads.
+            </p>
+          </div>
+          <div className="col-md-4">
+            <p className="paraHead">Liability</p>
+            <p>
+              Employers who hire drivers, such as ride-sharing companies or
+              delivery services, have a legal responsibility to ensure that
+              their drivers are properly licensed.
+            </p>
+          </div>
+          <div className="col-md-4">
+            <p className="paraHead">Fraud prevention</p>
+            <p>
+              Verification of a driver's license helps prevent fraud and ensures
+              that the person driving the vehicle is who they claim to be.
+            </p>
           </div>
         </div>
       </div>
