@@ -3,11 +3,25 @@ import { useEffect, useState } from "react";
 import Web3 from "web3";
 import DLicenseVerifier from "../contracts/VehicleLicenseVerifier.json";
 import Button from "react-bootstrap/esm/Button";
+import Modal from 'react-bootstrap/Modal';
+
+
 
 const Official = () => {
   const [currentAddress, setCurrentAddress] = useState("");
   const [contract, setContract] = useState();
-  const [licenses, setLicenses] = useState([]);
+  const [licenses, setLicenses] = useState([]);  
+  const [showModal, setShowModal] = useState(false);
+  const [selectedLicense, setSelectedLicense] = useState({
+    Name: "",
+    Village: "",
+    Dzongkhag: "",
+    LicenseNo: "",
+    IssuedDate: "",
+    Validity: "",
+    Barcode: "",
+  });
+  
 
   useEffect(() => {
     connectToMetaMask();
@@ -106,19 +120,58 @@ const Official = () => {
     });
   };
 
+  const handleInputChangeEdit = (event) => {
+    setSelectedLicense({
+      ...selectedLicense,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const viewOfficials = async () => {
     const officialss = await contract.methods.viewLicenseInfos().call();
     setLicenses(officialss);
-    console.log(licenses);
+   // console.log(licenses);
 
     // console.log(officialss)
     //setViewOff(viewOfficial);
   };
 
 
-  const editOfficials = (license) => {
-      console.log(license.Barcode)
-  }
+
+  const handleEdit = (license) => {
+    setSelectedLicense(license);
+    setShowModal(true);
+  };
+
+  const handleSave = async (newLicenseValues) => {
+    // Update the licenses array with the new values
+    // ...
+    console.log(selectedLicense.Name);
+    await contract.methods
+      .editLicenseInfo(
+        selectedLicense.Barcode,
+        selectedLicense.Name,
+        selectedLicense.Village,
+        selectedLicense.Dzongkhag,
+        selectedLicense.LicenseNo,
+        selectedLicense.IssuedDate,
+        selectedLicense.Validity
+      )
+      .send({ from: currentAddress }, function (error, transactionHash) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Transaction hash: ", transactionHash);
+          window.alert("Data entered Successfully!");
+        }
+      });
+    setShowModal(false);
+  };
+
+  
+ 
+
+ 
 
   return (
     <div>
@@ -237,6 +290,7 @@ const Official = () => {
             </div>
           </div>
           <div className="col-md-6 ">
+            <div className="viewOfficial">
             <button className="btn btn-primary p-2" onClick={viewOfficials}>
               View license
             </button>
@@ -256,22 +310,155 @@ const Official = () => {
                 </thead>
 
                 <tbody className="table-group-divider">
-                  {licenses.map((license) => (
-                    <tr key={license.Name}>
-                      <td>{license.Name}</td>
-                      <td>{license.Village}</td>
-                      <td>{license.Dzongkhag}</td>
-                      <td>{license.LicenseNo}</td>
-                      <td>{license.IssuedDate}</td>
-                      <td>{license.Validity}</td>
-                      <td>{license.Barcode}</td>
-                      <td>
-                        <Button className="btn btn-warning" onClick={() => editOfficials(license)}>Edit</Button>
-                      </td>
-                    </tr>
-                  ))}
+                {licenses.map((license) => (
+                  <tr key={license.LicenseNo}>
+                    <td>{license.Name}</td>
+                    <td>{license.Village}</td>
+                    <td>{license.Dzongkhag}</td>
+                    <td>{license.LicenseNo}</td>
+                    <td>{license.IssuedDate}</td>
+                    <td>{license.Validity}</td>
+                    <td>{license.Barcode}</td>
+                    <td>
+                      <Button onClick={() => handleEdit(license)}>Edit</Button>
+                    </td>
+                  </tr>
+                ))}
+                  
                 </tbody>
               </table>
+
+              <Modal show={showModal} onHide={() => setShowModal(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Edit License</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* Render a form with the selectedLicense object */}
+                {/* Bind form inputs to state variables */}
+
+
+
+                <div className="adminAddForm">
+                <form onSubmit={handleSubmit} className="form-floating fs-5">
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="name"
+                      class="form-control"
+                      name="Name"
+                      value={selectedLicense.Name}
+                      onChange={handleInputChangeEdit}
+                    />
+                    <label for="name">Name:</label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="village"
+                      class="form-control"
+                      name="Village"
+                      value={selectedLicense.Village}
+                      onChange={handleInputChangeEdit}
+                    />
+                    <label for="dzongkhag" class="form-label">
+                      Village:
+                    </label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="dzongkhag"
+                      class="form-control"
+                      name="Dzongkhag"
+                      value={selectedLicense.Dzongkhag}
+                      onChange={handleInputChangeEdit}
+                    />
+                    <label for="address" class="form-label">
+                      Dzongkhag:
+                    </label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="licenseNo"
+                      class="form-control"
+                      name="LicenseNo"
+                      value={selectedLicense.LicenseNo}
+                      onChange={handleInputChangeEdit}
+                    />
+  
+                    <label for="LicenseNo" class="form-label">
+                      LicenseNo:
+                    </label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="issuedDate"
+                      class="form-control"
+                      name="IssuedDate"
+                      value={selectedLicense.IssuedDate}
+                      onChange={handleInputChangeEdit}
+                    />
+  
+                    <label for="issuedDate" class="form-label">
+                      IssuedDate:
+                    </label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="validity"
+                      class="form-control"
+                      name="Validity"
+                      value={selectedLicense.Validity}
+                      onChange={handleInputChangeEdit}
+                    />
+  
+                    <label for="address" class="form-label">
+                      Validity:
+                    </label>
+                  </div>
+  
+                  <div className="mb-3 form-floating ">
+                    <input
+                      type="text"
+                      id="barcodeNo"
+                      class="form-control"
+                      name="Barcode"
+                      value={selectedLicense.Barcode}
+                      onChange={handleInputChangeEdit}
+                    />
+  
+                    <label for="address" class="form-label">
+                      Barcode No:
+                    </label>
+                  </div>
+  
+                 
+                </form>
+              </div>
+
+
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={() => handleSave()}>
+                  Save
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            </div>
+              
+              
             </div>
           </div>
         </div>
