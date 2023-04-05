@@ -115,6 +115,11 @@ const Official = () => {
     //setViewOff(viewOfficial);
   };
 
+
+  const editOfficials = (license) => {
+      console.log(license.Barcode)
+  }
+
   return (
     <div>
       <h1>Official</h1>
@@ -246,6 +251,7 @@ const Official = () => {
                     <th scope="col">License No</th>
                     <th scope="col">IssuedDate</th>
                     <th scope="col">Validity</th>
+                    <th scope="col">Barcode No</th>
                   </tr>
                 </thead>
 
@@ -258,8 +264,9 @@ const Official = () => {
                       <td>{license.LicenseNo}</td>
                       <td>{license.IssuedDate}</td>
                       <td>{license.Validity}</td>
+                      <td>{license.Barcode}</td>
                       <td>
-                        <Button className="btn btn-warning">Edit</Button>
+                        <Button className="btn btn-warning" onClick={() => editOfficials(license)}>Edit</Button>
                       </td>
                     </tr>
                   ))}

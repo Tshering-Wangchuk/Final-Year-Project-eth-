@@ -12,6 +12,7 @@ contract VehicleLicenseVerifier {
     constructor() {
         admin = msg.sender;
     }
+    
 
     function verifyOfficial(address officialAddress) public view returns (bool) {
     for (uint i = 0; i < addressOfOfficials.length; i++) {
@@ -47,6 +48,9 @@ contract VehicleLicenseVerifier {
 
 
 
+
+
+
 struct licenseDetail{
         string Name;
         string Village;
@@ -54,6 +58,7 @@ struct licenseDetail{
         string LicenseNo;
         string IssuedDate;
         string Validity;
+        uint Barcode;
     }
 
     //to add the licensedeatils to the blockchain
@@ -61,7 +66,7 @@ struct licenseDetail{
     mapping(uint=>licenseDetail) licenseInfos;
 
     function addLicenseInfo(uint _barcodeNumber,string memory _name,string memory _village,string memory _dzongkhag,string memory _licenseNo,string memory _issuedDate,string memory _validity) public{
-        licenseInfos[_barcodeNumber]=licenseDetail(_name,_village,_dzongkhag,_licenseNo,_issuedDate,_validity); 
+        licenseInfos[_barcodeNumber]=licenseDetail(_name,_village,_dzongkhag,_licenseNo,_issuedDate,_validity,_barcodeNumber); 
         barcodeNumbers.push(_barcodeNumber);
     }
 
@@ -73,6 +78,16 @@ struct licenseDetail{
     }
     return license;
 }
+
+
+function editLicenseInfo(uint _barcodeNumber, string memory _name, string memory _village, string memory _dzongkhag, string memory _licenseNo, string memory _issuedDate, string memory _validity) public {
+    
+    licenseInfos[_barcodeNumber] = licenseDetail(_name, _village, _dzongkhag, _licenseNo, _issuedDate, _validity, _barcodeNumber);
+}
+
+
+    
+
 
 }
 
