@@ -176,7 +176,9 @@ const Official = () => {
   return (
     <div>
       <h1>Official</h1>
-      <h2> current official Address: {currentAddress}</h2>
+      <label className="walletAddress"> Official Wallet Address : </label>
+      <label className="walletAddressValue">{currentAddress} </label>
+
 
       <div className="container background">
         <div className="row ">

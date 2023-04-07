@@ -107,7 +107,8 @@ const Admin = (props) => {
   return (
     <div>
       <h1>Admin</h1>
-      <h2> hello {currentAddress}</h2>
+      <label className="walletAddress"> Wallet Address : </label>
+      <label className="walletAddressValue">{currentAddress} </label>
 
       <div className="container background">
         <div className="row ">

@@ -41,10 +41,11 @@
 
 
 .background {
-  background-color: #eff2f6;
+  
   height: 1000px;
   font-family:sans-serif;
   padding: 1%;
+  
   
 
 }
@@ -55,16 +56,22 @@
 }
 
 .websitename{
-  margin-top: 10%;
-  font-size:70px;
+  margin-top: 5%;
+  font-size:60px;
   
   
 }
 
+.websitenamerow{
+  
+}
+
 .loginMaterials{
-  background-color: rgb(221, 231, 241);
-  padding: 5%;
+  background-color: #D3D3D3;
+  padding: 10%;
   margin: 5%;
+  border-radius: 50%;
+  
   
 }
 
@@ -86,10 +93,37 @@
 
 .paraHead{
 font-weight: bold;
+
 }
 
-.homePic{
-  height: 1rem;
-  padding: 30%;
+.paraHeads{
+  background-color: #D3D3D3;
+  
 }
 
+
+
+
+
+.Navbar{
+  background-color: #6610f2;
+  
+  
+}
+.Navbar a {
+  color: #ffffff;
+  
+}
+
+.logo {
+  border-radius: 50%;
+}
+
+.walletAddress{
+  font-size: large;
+  font-weight: bold;
+}
+
+.walletAddressValue{
+  margin-left: 2%;
+}

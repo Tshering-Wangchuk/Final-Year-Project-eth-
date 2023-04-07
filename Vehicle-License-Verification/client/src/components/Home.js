@@ -100,14 +100,14 @@ export const Home = (props) => {
   return (
     <div className="container background">
       <div className="row ">
-        <div className="col-md-9">
+        <div className="col-md-9 websitenamerow">
           <p className="fw-bolder websitename">
             Driving License Verification System
           </p>
           
         </div>
 
-        <div className="col-md-3 ">
+        <div className="col-md-3 websitenamerow">
           <div className="loginMaterials">
             <div className="text-info-emphasis fs-4">
               <p>Please Login with</p>
@@ -136,20 +136,10 @@ export const Home = (props) => {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-md-4">
-            <img className="homePic img-fluid" src={Safety} />
-          </div>
-          <div className="col-md-4">
-            <img className="homePic img-fluid" src={liability} />
-          </div>
-          <div className="col-md-4">
-            <img className="homePic img-fluid" src={fraud} />
-          </div>
-        </div>
+        
 
-        <div className="row">
-          <div className="col-md-4">
+        <div className="row ">
+          <div className="col-md-4 ">
             <p className="paraHead">Safety</p>
             <p>
               Driving license verification helps ensure that drivers have the
@@ -157,7 +147,7 @@ export const Home = (props) => {
               public roads.
             </p>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 ">
             <p className="paraHead">Liability</p>
             <p>
               Employers who hire drivers, such as ride-sharing companies or
@@ -165,7 +155,7 @@ export const Home = (props) => {
               their drivers are properly licensed.
             </p>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 ">
             <p className="paraHead">Fraud prevention</p>
             <p>
               Verification of a driver's license helps prevent fraud and ensures
