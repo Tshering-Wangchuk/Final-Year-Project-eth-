@@ -32,6 +32,7 @@ app.post('/verificationapi', async (req, res) => {
     });
 
     const {code}  = req.body; 
+    console.log(code)
 
     let verified = false; // Initialize verification status as false
 
@@ -43,10 +44,10 @@ app.post('/verificationapi', async (req, res) => {
     }
 
     if (verified) {
-        res.status(200).send(JSON.stringify({message: 'True'})); // Send positive response if verified
+      res.status(200).json({message: 'True'}); // Send positive response if verified
     } 
     else {
-        res.status(404).send(JSON.stringify({message: 'False'})); // Send negative response if not verified
+      res.status(404).json({message: 'False'}); // Send negative response if not verified
     }
 });
 

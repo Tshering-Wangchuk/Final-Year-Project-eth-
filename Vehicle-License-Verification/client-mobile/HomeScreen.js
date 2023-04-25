@@ -24,7 +24,7 @@ export default function Homescreen({ navigation }) {
         <Text style={styles.subtitle}>This application utilizes blockchain technology to authenticate your driving license. You can easily confirm the validity of your license at any time and from any location by scanning the QR code with your mobile phone.</Text>
         <Button
         title="Go to Details"
-        onPress={() => navigation.navigate('Detail')}
+        onPress={() => navigation.navigate('Scan')}
       />
       </View>
 
