@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: linear-gradient(to bottom, #774c94 0%, #333333 50%, #000000 100%);
 }
 
 
@@ -58,6 +59,7 @@
 .websitename{
   margin-top: 5%;
   font-size:60px;
+  color: rgb(255, 8, 255);
   
   
 }
@@ -106,7 +108,7 @@ font-weight: bold;
 
 
 .Navbar{
-  background-color: #6610f2;
+  background-color: #683cafc4;
   
   
 }

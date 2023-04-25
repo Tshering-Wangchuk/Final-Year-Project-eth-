@@ -140,24 +140,24 @@ export const Home = (props) => {
 
         <div className="row ">
           <div className="col-md-4 ">
-            <p className="paraHead">Safety</p>
-            <p>
+            <p className="paraHead text-white">Safety</p>
+            <p className="text-white">
               Driving license verification helps ensure that drivers have the
               necessary skills and knowledge to operate a vehicle safely on
               public roads.
             </p>
           </div>
           <div className="col-md-4 ">
-            <p className="paraHead">Liability</p>
-            <p>
+            <p className="paraHead text-white">Liability</p>
+            <p  className="text-white">
               Employers who hire drivers, such as ride-sharing companies or
               delivery services, have a legal responsibility to ensure that
               their drivers are properly licensed.
             </p>
           </div>
           <div className="col-md-4 ">
-            <p className="paraHead">Fraud prevention</p>
-            <p>
+            <p className="paraHead text-white">Fraud prevention</p>
+            <p  className="text-white">
               Verification of a driver's license helps prevent fraud and ensures
               that the person driving the vehicle is who they claim to be.
             </p>

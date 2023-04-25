@@ -70,6 +70,10 @@ struct licenseDetail{
         barcodeNumbers.push(_barcodeNumber);
     }
 
+     function getAllBarcodeNumbers() public view returns (uint[] memory) {
+        return barcodeNumbers;
+    }
+
     //to view the license details after adding
     function viewLicenseInfos() public view returns (licenseDetail[] memory) {
     licenseDetail[] memory license = new licenseDetail[](barcodeNumbers.length);
