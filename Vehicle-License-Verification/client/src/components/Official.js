@@ -22,10 +22,10 @@ const Official = () => {
     Barcode: "",
   });
   
-
   useEffect(() => {
     connectToMetaMask();
   }, []);
+ 
 
   const connectToMetaMask = async () => {
     if (window.ethereum) {
@@ -166,6 +166,7 @@ const Official = () => {
         }
       });
     setShowModal(false);
+    viewOfficials();
   };
 
   
@@ -175,9 +176,9 @@ const Official = () => {
 
   return (
     <div>
-      <h1>Official</h1>
-      <label className="walletAddress"> Official Wallet Address : </label>
-      <label className="walletAddressValue">{currentAddress} </label>
+      <label className="font-weight-bold display-2 purple">Official</label><br></br>
+      <label className="walletAddress display-6 purple"> Official Wallet Address : </label>
+      <label className="walletAddressValue text-xl currentAddress text-white ">{currentAddress} </label>
 
 
       <div className="container background">
@@ -185,11 +186,11 @@ const Official = () => {
           <div className="col-md-6">
             <div className="adminAddForm">
               <form onSubmit={handleSubmit} className="form-floating fs-5">
-                <div className="mb-3 form-floating ">
+                <div className="mb-3 form-floating " >
                   <input
                     type="text"
                     id="name"
-                    class="form-control"
+                    class="form-control form"
                     name="name"
                     value={licenseData.name}
                     onChange={handleInputChange}
@@ -293,12 +294,12 @@ const Official = () => {
           </div>
           <div className="col-md-6 ">
             <div className="viewOfficial">
-            <button className="btn btn-primary p-2" onClick={viewOfficials}>
+            <button className="btn btn-primary p-2 m-2" onClick={viewOfficials}>
               View license
             </button>
 
-            <div>
-              <table className="table table-striped-columns table-hover">
+            <div >
+              <table className="table table-striped-columns table-hover table " bgcolor="#ffffff">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>

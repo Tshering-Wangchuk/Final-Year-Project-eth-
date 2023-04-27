@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import {BarCodeScanner} from "expo-barcode-scanner";
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function Details() {
@@ -27,7 +28,7 @@ const handleBarCodeScanned = async ({type,data}) => {
       "code": `${data}`
   };
 
-    await fetch('http://10.2.23.248:3001/verificationapi', {
+    await fetch('http://10.2.23.64:3001/verificationapi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -71,6 +72,8 @@ if(hasPermission === null){
 
 
   return(
+
+    
       <View style={styles.container}>
          <View style={styles.barcodebox}>
             <BarCodeScanner
@@ -80,7 +83,7 @@ if(hasPermission === null){
          </View>
          <Text style={styles.maintext}>{text}</Text>
 
-         {scanned && <Button title='scan again?' onPress={()=> setScanned(false)} color='tomato'/>}
+         {scanned && <Button title='scan again?' onPress={()=> setScanned(false)} />}
         
       </View>
   )
@@ -92,7 +95,7 @@ if(hasPermission === null){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#aa62b3',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     width: 500,
     overflow:'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
+    backgroundColor: '#a44caf'
   },
 
   maintext: {

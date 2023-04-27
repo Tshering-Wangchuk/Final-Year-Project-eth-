@@ -129,3 +129,15 @@ font-weight: bold;
 .walletAddressValue{
   margin-left: 2%;
 }
+
+.purple {
+  color: rgb(255, 8, 255);
+}
+
+.currentAddress{
+  font-size: 25px;
+}
+
+.table{
+  border-radius: 1%;
+}

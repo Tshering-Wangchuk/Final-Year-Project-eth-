@@ -106,9 +106,9 @@ const Admin = (props) => {
 
   return (
     <div>
-      <h1>Admin</h1>
-      <label className="walletAddress"> Wallet Address : </label>
-      <label className="walletAddressValue">{currentAddress} </label>
+      <label className="font-weight-bold display-2 purple">Admin</label><br></br>
+      <label className="walletAddress display-6 purple">Admin Wallet Address : </label>
+      <label className="walletAddressValue text-xl currentAddress text-white">{currentAddress} </label>
 
       <div className="container background">
         <div className="row ">
@@ -165,7 +165,7 @@ const Admin = (props) => {
           <div className="col-md-6">
             <Button className="btn btn-primary p-2" onClick={viewOfficials}>View users</Button>
             <div>
-              <table className="table table-striped-columns table-hover">
+              <table className="table table-striped-columns table-hover" bgcolor="#ffffff">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
