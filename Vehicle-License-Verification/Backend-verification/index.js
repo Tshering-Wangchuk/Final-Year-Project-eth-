@@ -9,7 +9,7 @@ const web3 = new Web3('http://127.0.0.1:7545');
 
 const mycontractABI = require('./VehicleLicenseVerifier.json');
 const contractABI = mycontractABI.abi;
-const contractAddress = '0xc960407Abf0da0EFCb3e35f618E582058C0Fe1ec';
+const contractAddress = '0xc899cAD2d4E014E950289F4dF3Ca61B842B5f300';
 const myContract = new web3.eth.Contract(contractABI, contractAddress);
 
 
